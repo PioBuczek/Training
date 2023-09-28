@@ -86,6 +86,8 @@
 #         client_socket.send(server_answer.encode("utf8"))
 #      client_socket.close()
 #     print(f"Connection with {address[0]}:{address[1]} closed")
+
+
 import json
 import socket as s
 import datetime
@@ -138,20 +140,43 @@ def authentication(client_socket):
 authenticated_user_type = authentication(client_socket)
 
 if authenticated_user_type:
-    client_socket.send(f"You are connected as {authenticated_user_type}".encode("utf8"))
-    print(f"You are connected as {authenticated_user_type}")
+    if authenticated_user_type == "admin":
+        user_type_message = "You are admin - can use all functions"
+    elif authenticated_user_type == "user":
+        user_type_message = "You are user - can use info and uptime functions"
+    client_socket.send(
+        f"You are connected as {authenticated_user_type}\n{user_type_message}".encode(
+            "utf8"
+        )
+    )
+    print(f"Client connected as {authenticated_user_type}")
+
 
 while True:
-    client_request = client_socket.recv(BUFFER).decode("utf8")
-    if client_request == "info":
-        server_answer = info
-    elif client_request == "help_msg":
-        server_answer = help_msg
-    elif client_request == "uptime":
-        server_answer = str(datetime.datetime.now() - uptime)
-    elif client_request == "stop":
-        client_socket.send(stop.encode("utf8"))
-        client_socket.close()
-        break
+    if authenticated_user_type == "admin":
+        client_request = client_socket.recv(BUFFER).decode("utf8")
+        if client_request == "info":
+            server_answer = info
+        elif client_request == "help_msg":
+            server_answer = help_msg
+        elif client_request == "uptime":
+            server_answer = str(datetime.datetime.now() - uptime)
+        elif client_request == "stop":
+            client_socket.send(stop.encode("utf8"))
+            client_socket.close()
+            break
 
-    client_socket.send(server_answer.encode("utf8"))
+        client_socket.send(server_answer.encode("utf8"))
+
+    elif authenticated_user_type == "user":
+        client_request = client_socket.recv(BUFFER).decode("utf8")
+        if client_request == "info":
+            server_answer = info
+        elif client_request == "help_msg":
+            server_answer = "You are not admin, you can not use this function"
+        elif client_request == "uptime":
+            server_answer = str(datetime.datetime.now() - uptime)
+        elif client_request == "stop":
+            server_answer = "You are not admin, you can not use this function"
+
+        client_socket.send(server_answer.encode("utf8"))

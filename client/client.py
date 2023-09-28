@@ -13,23 +13,16 @@ def authentication(client_socket):
     authenticated = False
     while not authenticated:
         print("Enter your username: ")
-        username = input()
+        client_socket.send(input().encode("utf8"))
         print("Enter your password: ")
-        password = input()
-        client_socket.send(username.encode("utf8"))
-        client_socket.send(password.encode("utf8"))
+        client_socket.send(input().encode("utf8"))
         response = client_socket.recv(BUFFER).decode("utf8")
         if response.startswith("Hi"):
             server_answer_authenticator = client_socket.recv(BUFFER).decode("utf8")
             print(server_answer_authenticator)
             authenticated = True
-
         else:
             print(response)
-    server_answer = client_socket.recv(BUFFER).decode("utf8")
-    print(server_answer)
-    print("skonczyłem autoryzacje")
-    print("zaczynamy")
 
 
 authentication(client_socket)
