@@ -118,15 +118,17 @@ while True:
         if client_request == "info":
             server_answer = info
         elif client_request == "message":
-            recipient = client_socket.recv(BUFFER).decode("utf8")
-            message_content = client_socket.recv(BUFFER).decode("utf8")
-            result = send_and_save_message(
-                client_socket,
-                authenticated_user["username"],
-                recipient,
-                message_content,
-            )
-            client_socket.send(result.encode("utf8"))
+            while True:
+                recipient = client_socket.recv(BUFFER).decode("utf8")
+                message_content = client_socket.recv(BUFFER).decode("utf8")
+                result = send_and_save_message(
+                    client_socket,
+                    authenticated_user["username"],
+                    recipient,
+                    message_content,
+                )
+                client_socket.send(result.encode("utf8"))
+                break
         elif client_request == "help_msg":
             server_answer = "You are not admin, you cannot use this function"
         elif client_request == "uptime":

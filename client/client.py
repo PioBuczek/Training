@@ -40,6 +40,8 @@ while True:
         message_content = input()
         client_socket.send(recipient.encode("utf8"))
         client_socket.send(message_content.encode("utf8"))
-
-    server_answer = client_socket.recv(BUFFER).decode("utf8")
-    print(server_answer)
+        server_answer = client_socket.recv(BUFFER).decode("utf8")
+        print(server_answer)
+    elif client_request in ["info", "help_msg", "uptime", "stop"]:
+        server_answer = client_socket.recv(BUFFER).decode("utf8")
+        print(server_answer)
