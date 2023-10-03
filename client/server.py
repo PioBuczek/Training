@@ -104,6 +104,8 @@ while True:
             server_answer = info
         elif client_request == "help_msg":
             server_answer = help_msg
+        elif client_request == "message":
+            server_answer = "You are not user"
         elif client_request == "uptime":
             server_answer = str(datetime.datetime.now() - uptime)
         elif client_request == "stop":
@@ -118,17 +120,16 @@ while True:
         if client_request == "info":
             server_answer = info
         elif client_request == "message":
-            while True:
-                recipient = client_socket.recv(BUFFER).decode("utf8")
-                message_content = client_socket.recv(BUFFER).decode("utf8")
-                result = send_and_save_message(
-                    client_socket,
-                    authenticated_user["username"],
-                    recipient,
-                    message_content,
-                )
-                client_socket.send(result.encode("utf8"))
-                break
+            recipient = client_socket.recv(BUFFER).decode("utf8")
+            message_content = client_socket.recv(BUFFER).decode("utf8")
+            result = send_and_save_message(
+                client_socket,
+                authenticated_user["username"],
+                recipient,
+                message_content,
+            )
+            client_socket.send(result.encode("utf8"))
+            continue
         elif client_request == "help_msg":
             server_answer = "You are not admin, you cannot use this function"
         elif client_request == "uptime":

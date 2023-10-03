@@ -33,15 +33,30 @@ while True:
     client_request = input("Enter your command: ")
     client_socket.send(client_request.encode("utf8"))
 
-    if client_request == "message":
-        print("Enter username: ")
-        recipient = input()
-        print("Enter your message: ")
-        message_content = input()
-        client_socket.send(recipient.encode("utf8"))
-        client_socket.send(message_content.encode("utf8"))
+    if client_request == "info":
         server_answer = client_socket.recv(BUFFER).decode("utf8")
         print(server_answer)
-    elif client_request in ["info", "help_msg", "uptime", "stop"]:
+
+    elif client_request == "help_msg":
         server_answer = client_socket.recv(BUFFER).decode("utf8")
         print(server_answer)
+
+    elif client_request == "uptime":
+        server_answer = client_socket.recv(BUFFER).decode("utf8")
+        print(server_answer)
+
+    elif client_request == "stop":
+        server_answer = client_socket.recv(BUFFER).decode("utf8")
+        print(server_answer)
+
+    elif client_request == "message":
+        while True:
+            print("Enter username: ")
+            recipient = input()
+            print("Enter your message: ")
+            message_content = input()
+            client_socket.send(recipient.encode("utf8"))
+            client_socket.send(message_content.encode("utf8"))
+            server_answer = client_socket.recv(BUFFER).decode("utf8")
+            print(server_answer)
+            break
