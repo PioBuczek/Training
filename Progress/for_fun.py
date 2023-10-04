@@ -34,3 +34,40 @@
 # for key, values in shopping_list.items():
 #     print(f"You bought: {key} and pay {values} $.")
 # print(f"In total you spent {result} $")
+
+
+# 4.Create a function that accepts a sentence and returns a dictionary
+# in which the keys are words and the values are the number of their occurrences.
+
+
+# def occurences(sentences):
+#     new = sentences.split()
+#     dict = {}
+#     for word in new:
+#         if word.isalpha():
+#             if word not in dict:
+#                 dict[word] = 1
+#             elif word in dict:
+#                 dict[word] += 1
+#     return dict
+
+
+# sentences = input(" Enter your sentences: ")
+
+# result = occurences(sentences)
+# print(result)
+
+# 5.Write a function that calculates the factorial of a number.
+
+
+# def factorial(numbers):
+#     sum = 1
+#     while numbers > 0:
+#         sum *= numbers
+#         numbers -= 1
+#     return sum
+
+
+# numbers = int(input("Enter your digit: "))
+# result = factorial(numbers)
+# print(result)
