@@ -1,5 +1,5 @@
 import unittest
-
+from fractions import Fraction
 from __init__ import sum
 
 
@@ -18,6 +18,24 @@ class TestSum(unittest.TestCase):
         data = [-1, 2, "3"]
         with self.assertRaises(TypeError):
             sum(data)
+
+    def test_tuple(self):
+        data = (-1, 2, 0)
+        result = sum(data)
+        self.assertAlmostEqual(result, 1)
+
+    def test_list_fraction(self):
+        """
+        Test that it can sum a list of fractions
+        """
+        data = [Fraction(1, 4), Fraction(1, 4), Fraction(2, 4)]
+        result = sum(data)
+        self.assertEqual(result, 1)
+
+    def test_bad_type(self):
+        data = "banana"
+        with self.assertRaises(TypeError):
+            result = sum(data)
 
 
 if __name__ == "__main__":
