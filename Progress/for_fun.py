@@ -96,12 +96,23 @@
 
 # 7.Create a list of integers and use list comprehension to create a new list containing only even numbers.
 
+# def numbers(list):
+#     even_numbers = [number for number in list if number % 2 == 0]
+#     return even_numbers
 
-def numbers(list):
-    even_numbers = [number for number in list if number % 2 == 0]
-    return even_numbers
+
+# list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# result = numbers(list)
+# print(result)
+
+# 8.Create a set containing unique items from a given list.
 
 
-list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-result = numbers(list)
+def unique(list):
+    unique_set = set(list)
+    return unique_set
+
+
+list = ["something", "is", "bad", "something", "is", "good"]
+result = unique(list)
 print(result)
