@@ -72,7 +72,7 @@
 # result = factorial(numbers)
 # print(result)
 
-# Create a function that checks whether a given number is prime.
+# 6. Create a function that checks whether a given number is prime.
 
 
 # def is_prime(number):
@@ -93,3 +93,15 @@
 
 # result = is_prime(number)
 # print(result)
+
+# 7.Create a list of integers and use list comprehension to create a new list containing only even numbers.
+
+
+def numbers(list):
+    even_numbers = [number for number in list if number % 2 == 0]
+    return even_numbers
+
+
+list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+result = numbers(list)
+print(result)
