@@ -71,3 +71,25 @@
 # numbers = int(input("Enter your digit: "))
 # result = factorial(numbers)
 # print(result)
+
+# Create a function that checks whether a given number is prime.
+
+
+# def is_prime(number):
+#     if number <= 1:
+#         return "This is not prime number"
+#     elif number == 2:
+#         return "2 is always prime number"
+#     elif number % 2 == 0:
+#         return "This is not prime number"
+#     else:
+#         for i in range(3, int(number**0.5) + 1):
+#             if number % i == 0:
+#                 return "This is not a prime number"
+#         return "This is prime number"
+
+
+# number = int(input(" Enter your digit: "))
+
+# result = is_prime(number)
+# print(result)
