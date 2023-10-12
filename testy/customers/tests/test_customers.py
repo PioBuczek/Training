@@ -15,7 +15,7 @@ class TestCustomersDB(unittest.TestCase):
                 last_name  TEXT, 
                 email      TEXT, 
                 phone      TEXT, 
-                country    TEXT 
+                country    TEX
             );"""
         cursor.execute(create_table_sql)
 
