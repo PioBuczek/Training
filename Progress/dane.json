@@ -1,0 +1,14 @@
+{
+    "dane": [
+        {
+            "imie": "Piotr",
+            "nazwisko": "Buczek",
+            "wiek": 27
+        },
+        {
+            "imie": "Anna",
+            "nazwisko": "Buczek",
+            "wiek": 25
+        }
+    ]
+}
