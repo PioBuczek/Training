@@ -187,4 +187,23 @@
 # print(f"Area of square is {area_square}")
 
 
-# 12
+# 12. Create a dictionary representing personal data (name, surname, age, etc.) and save it to a JSON file.
+# Write a program that reads data from a JSON file and writes it to the console.
+
+# import json
+
+# dane = {"name": "X", "surname": "Y", "age": 27}
+
+# with open("my_data.json", "w") as file:
+#     json.dump(dane, file)
+
+
+# with open("my_data.json", "r") as file:
+#     data = json.load(file)
+
+# for x, y in data.items():
+#     print(x, y)
+
+# 13.
+lista = range(1, 100)
+new_list = [liczba for liczba in lista if liczba % 7 == 0]
