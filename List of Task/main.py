@@ -1,7 +1,11 @@
 from quit import quit_program
 from add_new_task import add_new_tasks
+from actually_list_of_task import list_of_task_
+from delete_task import task_to_delete
+from database import save_list_of_task, load_list_of_task
 
-list_of_task = {}
+list_of_task = load_list_of_task()
+
 
 while True:
     new_task = input(
@@ -11,9 +15,16 @@ while True:
     if new_task == "1":
         new_task_description = input("Enter your task:")
         list_of_task = add_new_tasks(new_task_description, list_of_task)
+        save_list_of_task(list_of_task)
         print("Task added successfully")
+    elif new_task == "2":
+        number_of_task = int(input("Enter number task to delete: "))
+        print(task_to_delete(number_of_task, list_of_task))
+        save_list_of_task(list_of_task)
+        print("Task deleted successfully")
+    elif new_task == "3":
+        task_list = list_of_task_(list_of_task)
+        print(task_list)
     elif new_task == "4":
         print(quit_program())
         break
-    result = add_new_tasks(new_task, list_of_task)
-    print(result)
