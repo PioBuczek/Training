@@ -21,7 +21,7 @@ while True:
         number_of_task = int(input("Enter number task to delete: "))
         print(task_to_delete(number_of_task, list_of_task))
         save_list_of_task(list_of_task)
-        print("Task deleted successfully")
+        # print("Task deleted successfully")
     elif new_task == "3":
         task_list = list_of_task_(list_of_task)
         print(task_list)

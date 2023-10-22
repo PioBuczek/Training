@@ -1,6 +1,4 @@
 def add_new_tasks(new_task, list_of_task):
-    new_task = str(new_task)
-    if new_task not in list_of_task.values():
-        number_task = max(list_of_task.keys(), default=0) + 1
-        list_of_task[number_task] = new_task
+    list_of_task_len = len(list_of_task)
+    list_of_task[list_of_task_len + 1] = new_task
     return list_of_task
