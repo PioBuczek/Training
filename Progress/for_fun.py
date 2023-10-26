@@ -205,5 +205,27 @@
 #     print(x, y)
 
 # 13.
-lista = range(1, 100)
-new_list = [liczba for liczba in lista if liczba % 7 == 0]
+# lista = range(1, 100)
+# new_list = [liczba for liczba in lista if liczba % 7 == 0]
+
+
+# 14
+
+# def calc_BMI(weight, height):
+#     BMI = weight / (height * height)
+#     bmi_round = round(BMI, 3)
+#     if BMI < 18.5:
+#         return f"Your BMI is {bmi_round}, you are underweight"
+#     elif BMI >= 18.5 and BMI <= 24.9:
+#         return f"Your BMI is {bmi_round}, you are good weight"
+#     elif BMI > 24.9:
+#         return f"Your BMI is {bmi_round}, you are fat"
+
+
+# if __name__ == "__main__":
+#     weight = float(input("Enter your weight in kg : "))
+#     height = float(input("Enter your height in m: "))
+#     result = calc_BMI(weight, height)
+#     print(result)
+
+# 15
