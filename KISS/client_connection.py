@@ -2,7 +2,6 @@ import json
 import socket
 from client_logic import Client
 
-
 client = Client("192.168.0.115", 33000, 1024)
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((client.HOST, client.PORT))
@@ -13,9 +12,11 @@ def authentication(client_socket):
         authenticated = False
         while not authenticated:
             print("Enter your username: ")
-            client_socket.send(input().encode("utf8"))
+            username = input()
             print("Enter your password: ")
-            client_socket.send(input().encode("utf8"))
+            password = input()
+            client_socket.send(username.encode("utf8"))
+            client_socket.send(password.encode("utf8"))
             response = client_socket.recv(client.BUFFER).decode("utf8")
             if response.startswith("Hi"):
                 server_answer_authenticator = client_socket.recv(client.BUFFER).decode(
@@ -47,22 +48,17 @@ def run(client_socket):
                 print(client.server_answer)
 
             elif client_request == "message":
-                while True:
-                    print("Enter username: ")
-                    recipient = input()
-                    print("Enter your message: ")
-                    message_content = input()
-                    client_socket.send(recipient.encode("utf8"))
-                    client_socket.send(message_content.encode("utf8"))
-                    client.server_answer = client_socket.recv(client.BUFFER).decode(
-                        "utf8"
-                    )
-                    print(client.server_answer)
-                    break
+                print("Enter username: ")
+                recipient = input()
+                print("Enter your message: ")
+                message_content = input()
+                client_socket.send(recipient.encode("utf8"))
+                client_socket.send(message_content.encode("utf8"))
+                client.server_answer = client_socket.recv(client.BUFFER).decode("utf8")
+                print(client.server_answer)
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
 
 if __name__ == "__main__":
-    authentication(client_socket)
     run(client_socket)
