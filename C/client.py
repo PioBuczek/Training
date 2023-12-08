@@ -10,7 +10,7 @@ client_socket = s.socket(s.AF_INET, s.SOCK_STREAM)
 client_socket.connect((HOST, PORT))
 
 while True:
-    server_request = client_socket.recv(BUFFER).decode("utf8")
-    print(server_request)
-    client_answer = input()
+    client_answer = input("Command: ")
     client_socket.send(client_answer.encode("utf8"))
+    server_answer = client_socket.recv(BUFFER).decode("utf8")
+    print(server_answer)
