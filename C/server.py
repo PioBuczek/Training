@@ -25,3 +25,11 @@ while True:
         elif client_answer == "info":
             server_answer = json.dumps(server.info())
             client_socket.send(server_answer.encode("utf8"))
+        elif client_answer == "uptime":
+            server_answer = server.current_time()
+            client_socket.send(server_answer.encode("utf8"))
+        elif client_answer == "stop":
+            server_answer = "Bye!"
+            client_socket.send(server_answer.encode("utf8"))
+            server_socket.close()
+            break
