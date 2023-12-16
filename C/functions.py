@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 
 class Server:
@@ -6,16 +6,18 @@ class Server:
         self.HOST = "192.168.0.115"
         self.PORT = 33000
         self.BUFFER = 1024
-        self.version = "0.1.0"
-        self.uptime = datetime.datetime.now()
+        self.creation_time = datetime.now()
+        self.version = "Version 0.1.0"
 
-    def current_time(self):
-        server_time = str(datetime.datetime.now() - self.uptime)
+    def uptime(self):
+        current_time = datetime.now()
+        server_uptime = current_time - self.creation_time
+        server_time = {"server_time": str(server_uptime)}
         return server_time
 
     def info(self):
-        number_version = {
-            "version": self.version,
-            "version date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M"),
+        version = {
+            "Version": self.version,
+            "Version_date": datetime.now().strftime("%m/%d/%Y, %H:%M"),
         }
-        return number_version
+        return version
