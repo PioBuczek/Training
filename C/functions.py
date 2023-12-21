@@ -9,6 +9,7 @@ class Server:
         self.BUFFER = 1024
         self.creation_time = datetime.now()
         self.version = "Version 0.1.0"
+        self.authenticate_user = None
 
     def uptime(self):
         current_time = datetime.now()

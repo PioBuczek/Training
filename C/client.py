@@ -12,7 +12,7 @@ client_socket.connect((client.HOST, client.PORT))
 
 
 def authenticator():
-    authenticate_user = None
+    authenticate_user = False
     # username
     print(client_socket.recv(client.BUFFER).decode("utf8"))
     client_answer_about_username = input()
@@ -26,6 +26,8 @@ def authenticator():
     # auhenctiactor
     type_authenticator = client_socket.recv(client.BUFFER).decode("utf8")
     if type_authenticator.startswith("Hello"):
+        authenticate_user = True
+        print(type_authenticator)
         return authenticate_user
 
 

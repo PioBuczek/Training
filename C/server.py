@@ -16,36 +16,31 @@ client_socket, address = server_socket.accept()
 
 def authenticator():
     authenticate_user = None
-    authenticate_user_type_admin = None
-    authenticate_user_type_user = None
 
-    server_question_about_username = "Enter your username: "
-    client_socket.send(server_question_about_username.encode("utf8"))
-    client_answer_about_username = client_socket.recv(server.BUFFER).decode("utf8")
+    while authenticate_user is None:
+        server_question_about_username = "Enter your username: "
+        client_socket.send(server_question_about_username.encode("utf8"))
+        client_answer_about_username = client_socket.recv(server.BUFFER).decode("utf8")
 
-    server_question_about_password = "Enter your password: "
-    client_socket.send(server_question_about_password.encode("utf8"))
-    client_answer_about_password = client_socket.recv(server.BUFFER).decode("utf8")
+        server_question_about_password = "Enter your password: "
+        client_socket.send(server_question_about_password.encode("utf8"))
+        client_answer_about_password = client_socket.recv(server.BUFFER).decode("utf8")
 
-    for user in users:
-        if (
-            client_answer_about_username == user["user"]
-            and client_answer_about_password == user["password"]
-        ):
-            authenticate_user = user
-            break
+        for user in users:
+            if (
+                client_answer_about_username == user["user"]
+                and client_answer_about_password == user["password"]
+            ):
+                authenticate_user = user
+                break
 
-    if authenticate_user:
-        if authenticate_user["user"] == "admin":
-            client_socket.send("Hello admin! ".encode("utf8"))
-            return authenticate_user_type_admin
-        elif authenticate_user["user"] == "user":
-            client_socket.send("Hello user! ".encode("utf8"))
-            return authenticate_user_type_user
+        if authenticate_user:
+            client_socket.send(f"Hello {client_answer_about_username} ".encode("utf8"))
+        else:
+            print("Authentication failed.")
+            client_socket.send("Authentication failed. Try again.".encode("utf8"))
 
-    print("Authentication failed.")
-    client_socket.send("Authentication failed. Try again.".encode("utf8"))
-    return authenticate_user
+    return authenticate_user["type"]
 
 
 authenticate_user_type = authenticator()
