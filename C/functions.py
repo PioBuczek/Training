@@ -1,5 +1,8 @@
 from datetime import datetime
 from database_user import users
+from users_config import User
+import random
+import string
 
 
 class Server:
@@ -23,3 +26,23 @@ class Server:
             "Version_date": datetime.now().strftime("%m/%d/%Y, %H:%M"),
         }
         return version
+
+    def list_of_users(self):
+        self.users = {}
+
+    def add_user(self, username):
+        if self.get_users():
+            print("Choose another nickname.")
+        else:
+            password = self.generate_password()
+            user_data = {"username": username, "password": password}
+            self.users[username] = user_data
+            print(f"Użytkownik {username} został dodany. Hasło: {password}")
+
+    def get_users(self, username):
+        return self.users.get(username, None)
+
+    def generate_password(self):
+        characters = string.ascii_letters + string.digits + string.punctuation
+        password = "".join(random.choice(characters) for x in range(12))
+        return password

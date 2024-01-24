@@ -36,10 +36,14 @@ authenticate_user_type = authenticator()
 if authenticate_user_type:
     while True:
         client_commands = input("Command: ").encode("utf8")
-        if client_commands == "stop":
-            client_socket.close()
-            break
-        else:
+        if client_commands == "login":
             client_socket.send(client_commands)
             server_answer = client_socket.recv(client.BUFFER).decode("utf8")
             print(server_answer)
+            if client_commands == "stop":
+                client_socket.close()
+                break
+            else:
+                client_socket.send(client_commands)
+                server_answer = client_socket.recv(client.BUFFER).decode("utf8")
+                print(server_answer)
